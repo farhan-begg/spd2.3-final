@@ -10,9 +10,7 @@
 import random
 
 def draw_board(board):
-    # This function prints out the board that it was passed.
-
-    # "board" is a list of 10 strings representing the board (ignore index 0)
+    ''' This function prints out board'''
     print('   |   |')
     print(' ' + board[7] + ' | ' + board[8] + ' | ' + board[9])
     print('   |   |')
@@ -26,8 +24,7 @@ def draw_board(board):
     print('   |   |')
 
 def input_player_letter():
-    # Lets the player type which letter they want to be.
-    # Returns a list with the player’s letter as the first item, and the computer's letter as the second.
+    ''' lets player input and returns list with player’s and computers letter'''
     letter = ''
     while not (letter == 'X' or letter == 'O'):
         print('Do you want to be X or O?')
@@ -40,14 +37,14 @@ def input_player_letter():
         return ['O', 'X']
 
 def who_goes_first():
-    # Randomly choose the player who goes first.
+   '''randomly selects player or computer to go first'''
     if random.randint(0, 1) == 0:
         return 'computer'
     else:                       
         return 'player'
 
 def play_again():
-    # This function returns True if the player wants to play again, otherwise it returns False.
+    ''' ask player to play again'''
     print('Do you want to play again? (yes or no)')
     return input().lower().startswith('y')
 
@@ -55,11 +52,9 @@ def make_move(board, letter, move):
     board[move] = letter
 
 def is_winner(bo, le):
-    # Given a board and a player’s letter, this function returns True if that player has won.
-    # We use bo instead of board and le instead of letter so we don’t have to type as much.
+    ''' Given a board and a player’s letter, this function returns True if that player has won. '''
     return ((bo[7] == le and bo[8] == le and bo[9] == le) or # across the top
-            (bo[4] == le and bo[5] == le and bo[6] == le) or # across the middle    # TODO: Fix the indentation of this lines and the following ones.
-            (bo[1] == le and bo[2] == le and bo[3] == le) or # across the bottom
+            (bo[4] == le and bo[5] == le and bo[6] == le) or # across the middle    
             (bo[7] == le and bo[4] == le and bo[1] == le) or # down the left side
             (bo[8] == le and bo[5] == le and bo[2] == le) or # down the middle
             (bo[9] == le and bo[6] == le and bo[3] == le) or # down the right side
@@ -67,22 +62,18 @@ def is_winner(bo, le):
             (bo[9] == le and bo[5] == le and bo[1] == le)) # diagonal
 
 def get_board_copy(board):
-    # Make a duplicate of the board list and return it the duplicate.
+    ''' Make a duplicate of the board list and return it the duplicate. '''
     dupe_board= []
     for i in board:
         dupe_board.append(i)
     return dupe_board
-    # for i in range(0, len(board)): # TODO: Clean this mess!
-    #     dupeBoard.append(board[i])
-
-    # return dupeBoard
 
 def is_space_free(board, move):
     # Return true if the passed move is free on the passed board.
     return board[move] == ' '
 
 def get_player_move(board):
-    # Let the player type in their move.
+    ''' Let the player type in their move.'''
     move = ' ' # TODO: W0621: Redefining name 'move' from outer scope. Hint: Fix it according to https://stackoverflow.com/a/25000042/81306
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not is_space_free(board, int(move)):
         print('What is your next move? (1-9)')
@@ -90,8 +81,8 @@ def get_player_move(board):
     return int(move)
 
 def choose_random_move_from_list(board, movesList):
-    # Returns a valid move from the passed list on the passed board.
-    # Returns None if there is no valid move.
+    '''Returns a valid move from the passed list on the passed board.
+         Returns None if there is no valid move. '''
     possibleMoves = []
     for i in movesList:
         if is_space_free(board, i):
